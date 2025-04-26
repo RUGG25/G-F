@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Psicoterapeuta</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #b6bccc; font-family: 'Segoe UI', sans-serif; }
+    .card { border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
+    .portada { max-width: 100%; border-radius: 15px; }
+    .alert-success { display: none; }
+  </style>
+</head>
+<body class="container py-4">
+  <header class="text-center mb-4">
+    <img src="https://github.com/RUGG25/G-F/blob/main/portada_gF.jpg?raw=true" alt="Portada" class="portada mt-3">
+  </header>
+
+  <section>
+    <div class="card p-4">
+      <h3 class="text-center text-secondary">¿Quiénes somos?</h3>
+      <p> Profesional de la salud mental con enfoque cognitivo conductual y humanista existencial para acompañar y abordar diversas situaciones de salud mental y emocional. Atención a adultos individualmente o en parejas.
+Sexualidad clínica y educativa conductual con enfoque de género.  Atención a adolescentes en orientación y educación sexual integral.</p>
+      <h5>Misión</h5>
+      <p>Ofrecer servicios de diagnóstico, tratamiento y prevención en diferentes áreas de la salud mental, como la Ansiedad, la Depresión, entre otros. </p>
+      <h5>Visión</h5>
+      <p>Consolidarse como un servicio de acompañamiento y Atención Psicológica.</p>
+      <h5>Valores</h5>
+      <ul>
+        <li>Ética profesional</li>
+        <li>Empatía</li>
+        <li>Diversidad</li>
+        <li>Honestidad</li>
+        <li>Responsabilidad</li>
+        <li>Enfoque de género</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="accordion" id="Especialidades">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="Atencion Personal"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGine"> Atención Personal </button></h2>
+        <div id="collapseGine" class="accordion-collapse collapse" data-bs-parent="#especialidades">
+          <div class="accordion-body">Servicios de Diagnóstico, Tratamiento y Prevención de la Ansiedad, Depresión.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="Sexualidad Clinica y Educativa"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseObs">Sexualidad Clínica</button></h2>
+        <div id="collapseObs" class="accordion-collapse collapse" data-bs-parent="#especialidades">
+          <div class="accordion-body">Evaluación y Tratamiento de Problemas Sexuales, Disfunsiones Sexuales, Implementación de programas Educativos sobre Sexualidad.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="Parejas"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePed">Parejas</button></h2>
+        <div id="collapsePed" class="accordion-collapse collapse" data-bs-parent="#especialidades">
+          <div class="accordion-body">Problemas de Comunicacion, Celos, Infidelidad, Violencia, Familias de Origen, Crianza de los Hijos.</div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-5">
+    <div class="card p-4">
+      <h3 class="text-center text-secondary">Agendar Cita</h3>
+      <form id="formulario">
+        <div class="mb-3"><label class="form-label">Nombre completo</label><input class="form-control" name="Nombre completo" required></div>
+        <div class="mb-3"><label class="form-label">Teléfono</label><input class="form-control" name="Teléfono" required></div>
+        <div class="mb-3"><label class="form-label">Correo electrónico</label><input class="form-control" name="Correo electrónico" type="email" required></div>
+        <div class="mb-3"><label class="form-label">Edad</label><input class="form-control" name="Edad" required></div>
+        <div class="mb-3"><label class="form-label">Especialidad</label><select class="form-select" name="Especialidad">
+          <option>Psicoterapia individual</option><option>Orientación de Educación Sexual Integral</option><option>Psicoterapia de parejas</option>
+        </select></div>
+        <div class="mb-3"><label class="form-label">Fecha</label><input class="form-control" name="Fecha" type="date" required></div>
+        <div class="mb-3"><label class="form-label">Hora</label><input class="form-control" name="Hora" type="time" required></div>
+        <div class="mb-3"><label class="form-label">Comentarios adicionales</label><textarea class="form-control" name="Comentarios adicionales"></textarea></div>
+        <button class="btn btn-primary w-100" type="submit">Agendar cita</button>
+        <div id="mensajeExito" class="alert alert-success mt-3">👍 Gracias, tu cita ha sido agendada. ⏳ Redirigiendo al inicio... 🎉 Te contactaremos pronto.</div>
+      </form>
+    </div>
+  </section>
+  <script>
+    const form = document.getElementById('formulario');
+    const mensaje = document.getElementById('mensajeExito');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const datos = new FormData(form);
+      const url = 'https://script.google.com/macros/s/AKfycbxF6NkW5olOzNHA-qD7ByfUhII8455bLHqs7GjtsW48KURH-h5hu49KUnzM5tHX3I2i/exec';
+      try {
+        const res = await fetch(url, { method: 'POST', body: datos });
+        const text = await res.text();
+        if (text === 'success') {
+          mensaje.style.display = 'block';
+          form.reset();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(() => mensaje.style.display = 'none', 5000);
+        }
+      } catch (err) {
+        alert('Error al enviar. Intenta nuevamente.');
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
